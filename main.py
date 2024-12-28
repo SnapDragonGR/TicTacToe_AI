@@ -38,7 +38,10 @@ def get_move():
 
 
 def make_move(board, coordinates, player1, player2):
-    pass
+    coordinates = coordinates.split()
+    row = coordinates[0]
+    column = coordinates[1]
+    board[int(row) - 1][int(column) - 1] = player1 if player1 else player2
 
 
 def get_winner(board):
