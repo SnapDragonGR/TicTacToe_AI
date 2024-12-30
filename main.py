@@ -61,7 +61,10 @@ def make_move(board, coordinates, player):
 
 
 def get_winner(board):
-    pass
+    columns = board[0][0], board[1][0], board[2][0], board[0][1], board[1][1], board[2][1], board[0][2], board[1][2], board[2][2]
+    rows = board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2], board[2][0], board[2][1], board[2][2]
+    print(columns)
+    print(rows)
 
 
 def is_board_full(board):
@@ -80,6 +83,8 @@ while not winner:
     if not (player1 and player2):
         player1, player2 = assign_player()
 
+    winner = get_winner(board)
+
     # Print the board
     print_board(board)
 
@@ -94,9 +99,6 @@ while not winner:
     player2_move = get_move(player2)
 
     make_move(board, player2_move, player2)
-
-    # This func breaks the loop + determines the winner
-    winner = get_winner(board)
 
     # Breaks the loop if it's a draw
     if is_board_full(board):
