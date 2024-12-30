@@ -30,12 +30,12 @@ def assign_player():
     return player1, player2
 
 
-def get_move():
-    move = input("Choose where to make your move (Row Column): ").strip()
+def get_move(player):
+    move = input(f"{player}, choose where to make your move (Row Column): ").strip()
 
     if move not in ['1 1', '1 2', '1 3', '2 1', '2 2', '2 3', '3 1', '3 2', '3 3']:
         print("Invalid range. Please try again.")
-        return get_move()
+        return get_move(player)
 
     return move
 
@@ -64,21 +64,21 @@ player1 = False
 player2 = False
 
 while not winner:
-    #if not (player1 and player2):
-        #player1, player2 = assign_player()
+    if not (player1 and player2):
+        player1, player2 = assign_player()
 
     # Print the board
     print_board(board)
 
     # Get the coords of the move first
-    player1_move = get_move()
+    player1_move = get_move(player1)
 
     # Transfer the coords to the board
     make_move(board, player1_move, player1)
 
     print_board(board)
 
-    player2_move = get_move()
+    player2_move = get_move(player2)
 
     make_move(board, player2_move, player2)
 
