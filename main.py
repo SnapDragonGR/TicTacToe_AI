@@ -18,23 +18,23 @@ def assign_player():
     if choice == 'x':
         player1 = 'X'
         player2 = 'O'
-        print("Player 1 (X) goes first!")
+        print("\nPlayer 1 (X) goes first!")
     elif choice == 'o':
         player1 = 'O'
         player2 = 'X'
-        print("Player 2 (O) goes first!")
+        print("\nPlayer 2 (O) goes first!")
     else:
-        print("Invalid input. Please try again.")
+        print("\nInvalid input. Please try again.")
         return assign_player()
 
     return player1, player2
 
 
 def get_move(player):
-    move = input(f"{player}, choose where to make your move (Row Column): ").strip()
+    move = input(f"\n{player}, choose where to make your move (Row Column): ").strip()
 
     if move not in ['1 1', '1 2', '1 3', '2 1', '2 2', '2 3', '3 1', '3 2', '3 3']:
-        print("Invalid range. Please try again.")
+        print("\nInvalid range. Please try again.")
         return get_move(player)
 
     return move
@@ -42,9 +42,14 @@ def get_move(player):
 
 def make_move(board, coordinates, player):
     coordinates = coordinates.split()
-    row = coordinates[0]
-    column = coordinates[1]
-    board[int(row) - 1][int(column) - 1] = player
+    row = int(coordinates[0])
+    column = int(coordinates[1])
+    if board[row - 1][column - 1] == ' ':
+        board[int(row) - 1][int(column) - 1] = player
+    else:
+        print('\nThe cell is already occupied. Please try again.')
+        new_coordinates = get_move(player)
+        make_move(board, new_coordinates, player)
 
 
 def get_winner(board):
@@ -87,5 +92,5 @@ while not winner:
 
     # Breaks the loop if it's a draw
     if is_board_full(board):
-        print("It's a draw!")
+        print("\nIt's a draw!")
         winner = True
