@@ -1,6 +1,3 @@
-# Initial skeleton of the game
-
-
 def board_gen():
     return [[0 for i in range(3)] for j in range(3)]
 
@@ -37,11 +34,11 @@ def get_move():
     return move
 
 
-def make_move(board, coordinates, player1, player2):
+def make_move(board, coordinates, player):
     coordinates = coordinates.split()
     row = coordinates[0]
     column = coordinates[1]
-    board[int(row) - 1][int(column) - 1] = player1 if player1 else player2
+    board[int(row) - 1][int(column) - 1] = player
 
 
 def get_winner(board):
@@ -57,10 +54,10 @@ score = []
 
 # Game loop until the game_over function returns True
 winner = False
+player1 = False
+player2 = False
+
 while not winner:
-    player1 = False
-    player2 = False
-    # Player assignment
     if not (player1 and player2):
         player1, player2 = assign_player()
 
@@ -68,10 +65,16 @@ while not winner:
     print_board(board)
 
     # Get the coords of the move first
-    coordinates = get_move()
+    player1_move = get_move()
 
     # Transfer the coords to the board
-    make_move(board, coordinates, player1, player2)
+    make_move(board, player1_move, player1)
+
+    print_board(board)
+
+    player2_move = get_move()
+
+    make_move(board, player2_move, player2)
 
     # This func breaks the loop + determines the winner
     winner = get_winner(board)
