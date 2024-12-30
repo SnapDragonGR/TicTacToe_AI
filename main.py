@@ -1,10 +1,16 @@
 def board_gen():
-    return [[0 for i in range(3)] for j in range(3)]
+    return [[' ' for i in range(3)] for j in range(3)]
 
 
 def print_board(board):
-    for row in board:
-        print(' '.join(map(str, row)))
+    # Print column headers with dashes
+    print("    " + "   ".join(str(i + 1) for i in range(len(board[0]))))  # Column numbers
+    print("  " + "+---" * len(board[0]) + "+")  # Top border for columns
+    for row_idx, row in enumerate(board):
+        # Print row number with content
+        print(f"{row_idx + 1} | " + " | ".join(map(str, row)) + " |")
+        # Print separator line after each row
+        print("  " + "+---" * 3 + "+")
 
 
 def assign_player():
@@ -58,8 +64,8 @@ player1 = False
 player2 = False
 
 while not winner:
-    if not (player1 and player2):
-        player1, player2 = assign_player()
+    #if not (player1 and player2):
+        #player1, player2 = assign_player()
 
     # Print the board
     print_board(board)
