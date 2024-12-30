@@ -1,4 +1,5 @@
 def board_gen():
+    # Generate a 3x3 board as a list of lists for easy access
     return [[' ' for i in range(3)] for j in range(3)]
 
 
@@ -6,6 +7,7 @@ def print_board(board):
     # Print column headers with dashes
     print("    " + "   ".join(str(i + 1) for i in range(len(board[0]))))  # Column numbers
     print("  " + "+---" * len(board[0]) + "+")  # Top border for columns
+
     for row_idx, row in enumerate(board):
         # Print row number with content
         print(f"{row_idx + 1} | " + " | ".join(map(str, row)) + " |")
@@ -15,6 +17,7 @@ def print_board(board):
 
 def assign_player():
     choice = input("Do you want to be X or O? ").lower().strip()
+
     if choice == 'x':
         player1 = 'X'
         player2 = 'O'
@@ -24,6 +27,7 @@ def assign_player():
         player2 = 'X'
         print("\nPlayer 2 (O) goes first!")
     else:
+        # Error handling
         print("\nInvalid input. Please try again.")
         return assign_player()
 
@@ -33,6 +37,7 @@ def assign_player():
 def get_move(player):
     move = input(f"\n{player}, choose where to make your move (Row Column): ").strip()
 
+    # Error handling
     if move not in ['1 1', '1 2', '1 3', '2 1', '2 2', '2 3', '3 1', '3 2', '3 3']:
         print("\nInvalid range. Please try again.")
         return get_move(player)
@@ -41,9 +46,12 @@ def get_move(player):
 
 
 def make_move(board, coordinates, player):
+    # Split the input into two values for future board implementation
     coordinates = coordinates.split()
     row = int(coordinates[0])
     column = int(coordinates[1])
+
+    # Check if the cell is empty
     if board[row - 1][column - 1] == ' ':
         board[int(row) - 1][int(column) - 1] = player
     else:
