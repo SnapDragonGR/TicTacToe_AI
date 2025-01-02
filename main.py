@@ -5,7 +5,8 @@ def board_gen():
 
 def print_board(board):
     # Print column headers with dashes
-    print("    " + "   ".join(str(i + 1) for i in range(len(board[0]))))  # Column numbers
+    print("    " + "   ".join(str(i + 1)
+                              for i in range(len(board[0]))))  # Column numbers
     print("  " + "+---" * len(board[0]) + "+")  # Top border for columns
 
     for row_idx, row in enumerate(board):
@@ -35,10 +36,12 @@ def assign_player():
 
 
 def get_move(player):
-    move = input(f"\n{player}, choose where to make your move (Row Column): ").strip()
+    move = input(
+        f"\n{player}, choose where to make your move (Row Column): ").strip()
 
     # Error handling
-    if move not in ['1 1', '1 2', '1 3', '2 1', '2 2', '2 3', '3 1', '3 2', '3 3']:
+    if move not in ['1 1', '1 2', '1 3', '2 1',
+                    '2 2', '2 3', '3 1', '3 2', '3 3']:
         print("\nInvalid range. Please try again.")
         return get_move(player)
 
@@ -61,8 +64,10 @@ def make_move(board, coordinates, player):
 
 
 def get_winner(board):
-    columns = board[0][0], board[1][0], board[2][0], board[0][1], board[1][1], board[2][1], board[0][2], board[1][2], board[2][2]
-    rows = board[0][0], board[0][1], board[0][2], board[1][0], board[1][1], board[1][2], board[2][0], board[2][1], board[2][2]
+    columns = (board[0][0], board[1][0], board[2][0], board[0][1],
+               board[1][1], board[2][1], board[0][2], board[1][2], board[2][2])
+    rows = (board[0][0], board[0][1], board[0][2], board[1][0],
+            board[1][1], board[1][2], board[2][0], board[2][1], board[2][2])
     print(columns)
     print(rows)
 
